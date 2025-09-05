@@ -12,7 +12,7 @@ const displayLesson = (lessons) => {
     // Step: 3 Create Element
     const levelBtn = document.createElement("div");
     levelBtn.innerHTML = `
-    <button onclick="loadLevelWord(${leesson.level_no})" class="btn btn-outline btn-primary"><i class="fa-solid fa-book-open"></i> Lesson -${leesson.level_no}</button>
+    <button  onclick="loadLevelWord(${leesson.level_no})" class="btn btn-outline btn-primary"><i class="fa-solid fa-book-open"></i> Lesson -${leesson.level_no}</button>
     `;
     // Step: 4 append into container
     levelContainer.appendChild(levelBtn);
