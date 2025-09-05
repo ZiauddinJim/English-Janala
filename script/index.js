@@ -3,6 +3,8 @@ const lessonLevel = () => {
     .then((response) => response.json()) //promise of json data
     .then((json) => displayLesson(json.data));
 };
+
+// Section: Function
 const displayLesson = (lessons) => {
   // Step: 1 get the container & empty
   const levelContainer = document.getElementById("level-container");
@@ -12,11 +14,17 @@ const displayLesson = (lessons) => {
     // Step: 3 Create Element
     const levelBtn = document.createElement("div");
     levelBtn.innerHTML = `
-    <button  onclick="loadLevelWord(${leesson.level_no})" class="btn btn-outline btn-primary"><i class="fa-solid fa-book-open"></i> Lesson -${leesson.level_no}</button>
+    <button id="lesson-btn-${leesson.level_no}" onclick="loadLevelWord(${leesson.level_no})" class="btn btn-outline btn-primary lesson-btn"><i class="fa-solid fa-book-open"></i> Lesson -${leesson.level_no}</button>
     `;
     // Step: 4 append into container
     levelContainer.appendChild(levelBtn);
   });
+};
+
+// Section:  removeActive function create
+const removeActive = () => {
+  const lessonButton = document.querySelectorAll(".lesson-btn");
+  lessonButton.forEach((btn) => btn.classList.remove("active"));
 };
 
 // Section: Word
@@ -24,18 +32,25 @@ const loadLevelWord = (id) => {
   const url = `https://openapi.programming-hero.com/api/level/${id}`;
   fetch(url)
     .then((response) => response.json())
-    .then((json) => displayLevelWord(json.data));
+    .then((json) => {
+      removeActive(); //remove all active class
+      const clickBtn = document.getElementById(`lesson-btn-${id}`);
+      clickBtn.classList.add("active"); // add active class
+      displayLevelWord(json.data);
+    });
 };
+
+// Section:
 const displayLevelWord = (words) => {
   // Step: 1
   const wordContainer = document.getElementById("word-container");
   wordContainer.innerHTML = "";
   if (words.length == 0) {
     wordContainer.innerHTML = `
-    <div class="text-center font-bangla col-span-full my-20 w-fit mx-auto">
+    <div class="text-center col-span-full my-20 w-fit mx-auto">
                 <img src="./assets/alert-error.png" alt="" class="mx-auto mb-5">
-                <p class="text-gray-500 mb-3">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
-                <p class="text-3xl font-semibold">নেক্সট Lesson এ যান</p>
+                <p class="text-gray-500 mb-3 font-bangla">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
+                <p class="text-3xl font-semibold font-bangla">নেক্সট Lesson এ যান</p>
              </div>
     `;
     return;
@@ -54,7 +69,7 @@ const displayLevelWord = (words) => {
           word.meaning ? word.meaning : "অর্থ পাওয়া যায়নি"
         } /${word.pronunciation ? word.pronunciation : " পাওয়া যায়নি"}</p>
         <div class="flex justify-between mt-8">
-            <button class="btn btn-square btn-outline btn-primary">
+            <button onclick="my_modal_5.showModal()" class="btn btn-square btn-outline btn-primary">
                 <i class="fa-solid fa-circle-info"></i>
             </button>
             <button class="btn btn-square btn-outline btn-primary">

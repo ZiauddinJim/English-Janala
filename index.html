@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>English Janala</title>
     <link rel="shortcut icon" href="./assets/logo.png" type="image/x-icon">
+    <!-- Style CSS -->
+     <link rel="stylesheet" href="./styles/style.css">
     <!-- Tailwind & daisyUI -->
      <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -93,8 +95,8 @@
          <!--  Section: Lesson -->
          <section id="word-container" class="bg-gray-100 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 overflow-auto max-h-[40rem] gap-7 p-7 w-11/12 mx-auto rounded-xl mb-10">
              <div class="text-center font-bangla col-span-full my-20 w-fit mx-auto">
-                <p class="text-gray-500 mb-3">আপনি এখনো কোন Lesson Select করেন নি</p>
-                <p class="text-3xl font-semibold">একটি Lesson Select করুন।</p>
+                <p class="text-gray-500 mb-3 font-bangla">আপনি এখনো কোন Lesson Select করেন নি</p>
+                <p class="text-3xl font-semibold font-bangla">একটি Lesson Select করুন।</p>
              </div>
             
          </section>
@@ -140,9 +142,26 @@
             </div>
           </section>
     </main>
+    <!-- Try: -->
+    <!-- Open the modal using ID.showModal() method -->
+    <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
+    <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+            <h3 class="text-lg font-bold">Hello!</h3>
+            <p class="py-4">Press ESC key or click the button below to close</p>
+            <div class="modal-action">
+                <form method="dialog">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button class="btn">Close</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+    <!-- Try: -->
+
     <footer class="w-11/12 mx-auto py-24 flex justify-between items-center border-t-2 border-t-red-200 mt-20">
         <div>
-            <div  class="flex">
+            <div class="flex">
                 <span class="font-bold text-xl">English</span>
                 <img src="./assets/logo.png" alt="">
                 <span class="ml-2 font-bangla text-xl font-medium">জানালা</span>
