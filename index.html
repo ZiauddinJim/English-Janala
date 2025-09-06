@@ -89,8 +89,25 @@
          <section class="w-11/12 mx-auto mt-20">
             <h1 class="text-center font-bold text-3xl  mb-8"><span class="text-blue-400">Let's</span> Learn Vocabularies</h1>
             <div id="level-container" class="flex justify-center gap-5 mb-10 flex-wrap">
-            
             </div>
+
+            <!-- Section:  Search -->
+             <Section class="flex justify-center py-8">
+                <div class="join">
+                    <div>
+                        <label class="input validator join-item">
+                            <input id="search-input" type="text" placeholder="Search vocabulary now"/>
+                        </label>
+                    </div>
+                    <button id="Search-btn" class="btn btn-primary join-item">Search</button>
+                </div>
+             </Section>
+
+            <!-- Section: Loading -->
+            <Section id="spinner" class=" flex justify-center items-center py-10 hidden">
+                <span class="loading loading-bars loading-xl"></span>
+            </Section>
+
          </section >
          <!--  Section: Lesson -->
          <section id="word-container" class="bg-gray-100 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 overflow-auto max-h-[40rem] gap-7 p-7 w-11/12 mx-auto rounded-xl mb-10">
@@ -142,7 +159,7 @@
             </div>
           </section>
     </main>
-    <!-- Try: -->
+    <!-- Try: start -->
     <!-- Open the modal using ID.showModal() method -->
     <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
     <dialog id="word_modal" class="modal modal-bottom sm:modal-middle">
@@ -166,7 +183,7 @@
                 </div> -->
             </div>
     </dialog>
-    <!-- Try: -->
+    <!-- Try: end -->
 
     <footer class="w-11/12 mx-auto py-24 flex flex-col md:flex-row justify-between items-center border-t-2 border-t-red-200 mt-20">
         <div class="text-center sm:text-left mb-5 sm:mb-auto">

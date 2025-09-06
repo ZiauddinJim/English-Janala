@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulary Pronunciation</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .card {
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            margin: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .card:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+
+    <div class="container mx-auto p-10">
+        <h1 class="text-3xl font-bold text-center mb-6">Vocabulary Pronunciation</h1>
+        <p class="text-center text-gray-600">Follow Me & Hit Love 💓for More interestig feature implementation</p>
+
+
+        <div class="flex flex-wrap justify-center">
+            <!-- Vocabulary Cards -->
+            <div class="card" onclick="pronounceWord('Marhaba')">
+                <h2 class="text-xl font-semibold">Marhaba</h2>
+            </div>
+            <div class="card" onclick="pronounceWord('JavaScript')">
+                <h2 class="text-xl font-semibold">JavaScript</h2>
+            </div>
+            <div class="card" onclick="pronounceWord('a')">
+                <h2 class="text-xl font-semibold">a</h2>
+            </div>
+            <div class="card" onclick="pronounceWord('Maro')">
+                <h2 class="text-xl font-semibold">Maro</h2>
+            </div>
+
+            <div class="card" onclick="pronounceWord('Thaaaba')">
+                <h2 class="text-xl font-semibold">Thaaba</h2>
+            </div>
+        </div>
+    </div>
+
+    <p class="bg-blue-100 py-1 text-center"> Click on a card </p>
+<script src="./check.js"></script>
+</body>
+</html>

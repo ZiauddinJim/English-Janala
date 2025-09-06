@@ -1,10 +1,42 @@
+// Section: LessonLevel call
 const lessonLevel = () => {
   fetch("https://openapi.programming-hero.com/api/levels/all") //promise of response
     .then((response) => response.json()) //promise of json data
     .then((json) => displayLesson(json.data));
 };
 
-// Section: Function
+// Section: Search input value
+const SearchBtn = document
+  .getElementById("Search-btn")
+  .addEventListener("click", (e) => {
+    e.preventDefault();
+    removeActive();
+    const input = document.getElementById("search-input");
+    const searchValue = input.value.trim().toLowerCase();
+    console.log(searchValue);
+    fetch("https://openapi.programming-hero.com/api/words/all")
+      .then((response) => response.json())
+      .then((data) => {
+        const allWords = data.data;
+        const searchWord = allWords.filter((word) =>
+          word.word.toLowerCase().includes(searchValue)
+        );
+        displayLevelWord(searchWord);
+      });
+  });
+
+// Section: Spinner Manage
+const spinnerManage = (status) => {
+  if (status == true) {
+    document.getElementById("spinner").classList.remove("hidden");
+    document.getElementById("word-container").classList.add("hidden");
+  } else {
+    document.getElementById("word-container").classList.remove("hidden");
+    document.getElementById("spinner").classList.add("hidden");
+  }
+};
+
+// Section: Display Lesson show
 const displayLesson = (lessons) => {
   // Step: 1 get the container & empty
   const levelContainer = document.getElementById("level-container");
@@ -27,8 +59,9 @@ const removeActive = () => {
   lessonButton.forEach((btn) => btn.classList.remove("active"));
 };
 
-// Section: Word
+// Section: load Level Word
 const loadLevelWord = (id) => {
+  spinnerManage(true);
   const url = `https://openapi.programming-hero.com/api/level/${id}`;
   fetch(url)
     .then((response) => response.json())
@@ -40,7 +73,7 @@ const loadLevelWord = (id) => {
     });
 };
 
-// Section:
+// Section: Display load word
 const displayLevelWord = (words) => {
   // Step: 1
   const wordContainer = document.getElementById("word-container");
@@ -52,6 +85,8 @@ const displayLevelWord = (words) => {
                 <p class="text-gray-500 mb-3 font-bangla">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
                 <p class="text-3xl font-semibold font-bangla">নেক্সট Lesson এ যান</p>
              </div>`;
+    spinnerManage(false);
+
     return;
   }
   // Step: 2
@@ -73,7 +108,9 @@ const displayLevelWord = (words) => {
             })" class="btn btn-square btn-outline btn-primary">
                 <i class="fa-solid fa-circle-info"></i>
             </button>
-            <button class="btn btn-square btn-outline btn-primary">
+            <button onclick="pronounceWord('${
+              word.word
+            }')" class="btn btn-square btn-outline btn-primary">
                 <i class="fa-solid fa-volume-high"></i>
             </button>
         </div>
@@ -82,9 +119,17 @@ const displayLevelWord = (words) => {
     // Step: 4
     wordContainer.appendChild(wordCard);
   });
+  spinnerManage(false);
 };
 
-// Section: Load Word Details
+// Section: Pronounce word
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-US"; // English
+  window.speechSynthesis.speak(utterance);
+}
+
+// Section: Load Word Details ICON ⨌⫘⫘⫘⫘⫘⫘⫘⨌
 const loadWordDetails = async (id) => {
   const url = `https://openapi.programming-hero.com/api/word/${id}`;
   const response = await fetch(url);
