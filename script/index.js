@@ -51,8 +51,7 @@ const displayLevelWord = (words) => {
                 <img src="./assets/alert-error.png" alt="" class="mx-auto mb-5">
                 <p class="text-gray-500 mb-3 font-bangla">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
                 <p class="text-3xl font-semibold font-bangla">নেক্সট Lesson এ যান</p>
-             </div>
-    `;
+             </div>`;
     return;
   }
   // Step: 2
@@ -69,7 +68,9 @@ const displayLevelWord = (words) => {
           word.meaning ? word.meaning : "অর্থ পাওয়া যায়নি"
         } /${word.pronunciation ? word.pronunciation : " পাওয়া যায়নি"}</p>
         <div class="flex justify-between mt-8">
-            <button onclick="my_modal_5.showModal()" class="btn btn-square btn-outline btn-primary">
+            <button onclick="loadWordDetails(${
+              word.id
+            })" class="btn btn-square btn-outline btn-primary">
                 <i class="fa-solid fa-circle-info"></i>
             </button>
             <button class="btn btn-square btn-outline btn-primary">
@@ -81,6 +82,50 @@ const displayLevelWord = (words) => {
     // Step: 4
     wordContainer.appendChild(wordCard);
   });
+};
+
+// Section: Load Word Details
+const loadWordDetails = async (id) => {
+  const url = `https://openapi.programming-hero.com/api/word/${id}`;
+  const response = await fetch(url);
+  const details = await response.json();
+  displayLoadWordDetails(details.data);
+};
+// Section: Display load word details
+const displayLoadWordDetails = (word) => {
+  console.log(word);
+  const detailsBox = document.getElementById("details-container");
+  detailsBox.innerHTML = `
+  <div class="p-3 border-1 border-blue-200 rounded-lg">
+                    <h3 class="text-xl font-bold">${
+                      word.word
+                    } (<i class="fa-solid fa-microphone-lines"></i> :${
+    word.pronunciation
+  })</h3>
+                    <p class="font-bold mt-6">Meaning</p>
+                    <p class="mt-3 font-bangla font-semibold">${
+                      word.meaning
+                    }</p>
+                    <p class="font-bold mt-6">Example</p>
+                    <p class="py-3">${word.sentence}</p>
+                    <p class="font-bold mt-3 font-bangla">সমার্থক শব্দ গুলো</p>
+                    <div class="flex flex-wrap gap-2">
+                    ${word.synonyms
+                      .map(
+                        (synonyms) =>
+                          `<div class="badge badge-lg bg-[#EDF7FF]">${synonyms}</div>`
+                      )
+                      .join("")}
+                    </div>                    
+                    <div class="modal-action flex justify-start">
+                        <form method="dialog">
+                            <!-- if there is a button in form, it will close the modal -->
+                            <button class="btn btn-primary">Complete Learning</button>
+                        </form>
+                    </div>
+                </div>
+  `;
+  document.getElementById("word_modal").showModal();
 };
 
 lessonLevel();
